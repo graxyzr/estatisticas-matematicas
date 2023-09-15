@@ -1,0 +1,75 @@
+* {
+    font-family: 'Kanit', sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('img/background-estatistica.jpg');
+    background-size: cover;
+    background-repeat: no-repeat; 
+    background-attachment: fixed; 
+}
+
+header {
+    background-color: #23B861;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 5vh;
+    height: auto;
+    font-size: 2vh;
+    height: 7vh;
+}
+
+h1 {
+    margin: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    text-align: center;
+    font-size: 24px;
+    flex-direction: column;
+    align-items: center;
+    display: flex;
+}
+
+#resultado {
+    font-size: 24px;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+button {
+    background-color: #23B861;
+    color: #fff;
+    border: none;
+    padding: 10px 30px;
+    cursor: pointer;
+    border-radius: 5vh;
+    margin-top: 10px;
+}
+
+.p-container {
+    font-weight: bold;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #23B861;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
