@@ -1,4 +1,4 @@
-# Estatísticas-Matemáticas
+# Estatísticas Matemáticas
 
 Introdução:
 
