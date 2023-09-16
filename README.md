@@ -1,5 +1,4 @@
-# estatisticas-matematicas
-Trabalho de Matemática sobre Estatísticas - 2023 (IFRS - Campus Rio Grande)
+# Estatísticas-Matemáticas
 
 Introdução:
 
