@@ -6,6 +6,10 @@ function calcularEstatisticas() {
 
     if (numeros.length === 0 || (numeros.length === 1 && numeros[0] === 0)) {
 
+
+        resultadoDiv.style.color = "red";
+        resultadoDiv.style.textDecoration = "underline"
+        resultadoDiv.style.textDecorationColor = "red";
         resultadoDiv.textContent = 'Por favor, informe números válidos!';
 
     }
@@ -16,6 +20,8 @@ function calcularEstatisticas() {
         const moda = calcularModa(numeros);
         const mediana = calcularMediana(numeros);
 
+        resultadoDiv.style.color = "black";
+        resultadoDiv.style.textDecoration = "none";
         resultadoDiv.innerHTML = `
             <p>Média: ${media.toFixed(1)}</p>
             <p>Moda: ${moda.join(', ')}</p>
@@ -109,3 +115,8 @@ function limparCampo() {
     document.getElementById('resultado').textContent = '';
 
 }
+
+document.getElementById("meuBotao").addEventListener("click", function () {
+    window.location.href = "pg-two/explication.html"
+
+});
