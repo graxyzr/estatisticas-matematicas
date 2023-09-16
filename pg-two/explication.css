@@ -120,6 +120,10 @@ footer p {
         padding: 0;
     }
 
+    footer {
+        padding: 10px;
+    }
+
 }
 
 @media screen and (max-height:480px) {
@@ -132,6 +136,10 @@ footer p {
         padding: 20px;
     }
 
+    footer {
+        padding: 10px;
+    }
+
 }
 
 @media screen and (min-height: 768px) {
@@ -142,6 +150,10 @@ footer p {
 
     .container {
         padding: 30px;
+    }
+
+    footer {
+        padding: 10px;
     }
 
 }
