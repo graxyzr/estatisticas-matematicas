@@ -17,15 +17,30 @@
     </header>
 
     <div class="container">
-        <p class="p-container">Insira os números abaixo:</p>
-        <input type="text" id="numeros" placeholder="Ex: 4, 5, 8, 3, 6, 2, 9">
+        <p class="p-container">Escolha a operação:</p>
+        <select id="operacao">
+            <option value="mediaSimples">Média Simples</option>
+            <option value="mediaPonderada">Média Ponderada</option>
+            <option value="mediaHarmonica">Média Harmônica</option>
+            <option value="mediaGeometrica">Média Geométrica</option>
+            <option value="moda">Moda</option>
+            <option value="mediana">Mediana</option>
+            <option value="variancia">Variância</option>
+            <option value="desvioPadrao">Desvio Padrão</option>
+        </select>
         <br>
-        <button onclick="calcularEstatisticas()">Calcular</button>
-        <button onclick="limparCampo()">Limpar</button>
+        <button onclick="mostrarCampos()">Confirmar</button>
+        <div id="inputContainer" style="display: none;"></div>
+
+        <div id="calcularContainer" style="display: none;">
+            <button onclick="calcularEExibirResultado()">Calcular</button>
+            <button onclick="limparCampos()">Limpar</button>
+        </div>
+
         <div id="resultado"></div>
     </div>
 
-    <div class="container-t2">
+    <div class="container-t2"> <!-- Botão para as Explicações e Questões do ENEM -->
         <p>O que são Estatísticas Matemáticas?</p>
         <button id="meuBotao">Explique</button>
     </div>
