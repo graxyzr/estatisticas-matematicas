@@ -19,53 +19,7 @@ function mostrarCampos() {
     else {
         numCamposContainer.style.display = 'none';
         gerarCamposButton.style.display = 'none';
-    }
-
-
-    if (operacaoSelecionada === 'mediaPonderada') {
-
-        const numCamposInput = document.getElementById('numCampos');
-        const numCampos = parseInt(numCamposInput.value);
-
-        for (let i = 1; i <= numCampos; i++) {
-
-            // Cria um par de campos de entrada para números e pesos
-            const inputNumeros = document.createElement('input');
-            inputNumeros.type = 'text';
-            inputNumeros.placeholder = `Inserir números aqui (Campo ${i})`;
-            inputNumeros.id = 'numeros';
-
-            const inputPesos = document.createElement('input');
-            inputPesos.type = 'text';
-            inputPesos.placeholder = `Número de Pesos (Campo ${i})`;
-            inputPesos.id = 'pesos';
-
-            // Adiciona os campos de entrada ao inputContainer
-            inputContainer.appendChild(inputNumeros);
-            inputContainer.appendChild(inputPesos);
-
-            // Adiciona uma quebra de linha para separar os campos individuais
-            const br = document.createElement('br');
-            inputContainer.appendChild(br);
-
-        }
-
-        // Mostra o botão 'Calcular' após o botão 'Confirmar' ser clicado
-        calcularContainer.style.display = 'none';
-
-    }
-
-    else {
-
-        // Para outras operações, exibe apenas um campo
-        const inputNumeros = document.createElement('input');
-        inputNumeros.type = 'text';
-        inputNumeros.placeholder = 'Inserir os números aqui';
-        inputContainer.appendChild(inputNumeros);
-
-        // Mostra o botão de 'Calcular' após o botão de 'Confirmar'
-        calcularContainer.style.display = 'none';
-
+        calcularContainer.style.display = 'block';
     }
 
     inputContainer.style.display = 'block';
@@ -73,10 +27,54 @@ function mostrarCampos() {
 
 }
 
+// Adicione um event listener para o botão "Gerar Campos"
+document.getElementById('gerarCampos').addEventListener('click', function () {
+
+    const numCamposInput = document.getElementById('numCampos');
+    const numCampos = parseInt(numCamposInput.value);
+
+    // Limpe os campos de entrada anteriores
+    inputContainer.innerHTML = '';
+
+    for (let i = 0; i < numCampos; i++) {
+
+        // Cria campos de entrada para "Inserir números aqui"
+        const inputNumeros = document.createElement('input');
+        inputNumeros.type = 'text';
+        inputNumeros.placeholder = `Inserir números aqui (Campo ${i + 1})`;
+        inputNumeros.className = 'numeros-input'; // Adiciona uma classe para identificar campos de números
+
+        // Cria campos de entrada para "Número de Pesos"
+        const inputPesos = document.createElement('input');
+        inputPesos.type = 'text';
+        inputPesos.placeholder = `Número de Pesos (Campo ${i + 1})`;
+        inputPesos.className = 'pesos-input'; // Adiciona uma classe para identificar campos de pesos
+
+        // Adiciona os campos de entrada ao inputContainer
+        inputContainer.appendChild(inputNumeros);
+        inputContainer.appendChild(inputPesos);
+
+        // Adiciona uma quebra de linha para separar os campos individuais
+        const br = document.createElement('br');
+        inputContainer.appendChild(br);
+
+    }
+
+    // Exibe o botão "Calcular" e "Limpar"
+    calcularContainer.style.display = 'block';
+
+});
+
 document.querySelector('button[onclick="mostrarCampos()"]').addEventListener('click', function () {
 
     const gerarCamposButton = document.getElementById('gerarCampos');
     gerarCamposButton.style.display = 'block';
+
+});
+
+document.querySelector('#operacao').addEventListener('change', function () {
+
+    limparCampos();
 
 });
 
@@ -371,7 +369,3 @@ function limparCampos() {
     }
 
 }
-
-document.querySelector('#operacao').addEventListener('change', function () {
-    limparCampos();
-});
