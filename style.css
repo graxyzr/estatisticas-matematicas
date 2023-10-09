@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Prompt&display=swap');
 
 * {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Prompt', sans-serif;
 }
 
 body {
@@ -25,6 +25,10 @@ header {
     align-items: center;
 }
 
+h1 {
+    margin-right: 10px;
+}
+
 #img-estatistica {
     max-width: 100px;
 }
@@ -35,8 +39,8 @@ header {
     margin: 20px auto;
     margin-top: 130px;
     padding: 50px;
-    background-color: #D3D3D3;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    background-color: #EAEAEA;
+    box-shadow: 0 0 18px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
     text-align: center;
     font-size: 24px;
@@ -53,7 +57,7 @@ header {
 }
 
 button {
-    background-color: #006494;
+    background-color: #13293D;
     color: #fff;
     border: none;
     padding: 10px 30px;
@@ -104,6 +108,28 @@ footer p {
 
 #inputContainer {
     margin-top: 45px;
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+select,
+input {
+    border-radius: 15px;
+    border-color: #13293D;
+    text-align: center;
+    box-shadow: 0 0 18px rgba(0, 0, 0, 0.3);
+}
+
+#numCamposContainer {
+    text-align: center;
+    width: 100%;
+}
+
+#gerarCampos {
+    margin: 0 auto;
 }
 
 @media screen and (max-width: 768px) {
