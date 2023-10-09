@@ -5,28 +5,53 @@ function mostrarCampos() {
     const operacaoSelecionada = document.getElementById('operacao').value;
     const inputContainer = document.getElementById('inputContainer');
     const calcularContainer = document.getElementById('calcularContainer');
+    const numCamposContainer = document.getElementById('numCamposContainer');
+    const gerarCamposButton = document.getElementById('gerarCampos');
 
     // Limpa os campos de entrada anteriores
     inputContainer.innerHTML = '';
 
     if (operacaoSelecionada === 'mediaPonderada') {
+        numCamposContainer.style.display = 'block';
+        gerarCamposButton.style.display = 'block';
+    }
 
-        // Se a operação for Média Ponderada, exibe dois campos
-        const inputNumeros = document.createElement('input');
-        inputNumeros.type = 'text';
-        inputNumeros.placeholder = 'Inserir números aqui';
-        inputContainer.appendChild(inputNumeros);
+    else {
+        numCamposContainer.style.display = 'none';
+        gerarCamposButton.style.display = 'none';
+    }
 
-        const br = document.createElement('br');
-        inputContainer.appendChild(br);
 
-        const inputPesos = document.createElement('input');
-        inputPesos.type = 'text';
-        inputPesos.placeholder = 'Número de Pesos';
-        inputContainer.appendChild(inputPesos);
+    if (operacaoSelecionada === 'mediaPonderada') {
+
+        const numCamposInput = document.getElementById('numCampos');
+        const numCampos = parseInt(numCamposInput.value);
+
+        for (let i = 1; i <= numCampos; i++) {
+
+            // Cria um par de campos de entrada para números e pesos
+            const inputNumeros = document.createElement('input');
+            inputNumeros.type = 'text';
+            inputNumeros.placeholder = `Inserir números aqui (Campo ${i})`;
+            inputNumeros.id = 'numeros';
+
+            const inputPesos = document.createElement('input');
+            inputPesos.type = 'text';
+            inputPesos.placeholder = `Número de Pesos (Campo ${i})`;
+            inputPesos.id = 'pesos';
+
+            // Adiciona os campos de entrada ao inputContainer
+            inputContainer.appendChild(inputNumeros);
+            inputContainer.appendChild(inputPesos);
+
+            // Adiciona uma quebra de linha para separar os campos individuais
+            const br = document.createElement('br');
+            inputContainer.appendChild(br);
+
+        }
 
         // Mostra o botão 'Calcular' após o botão 'Confirmar' ser clicado
-        calcularContainer.style.display = 'block';
+        calcularContainer.style.display = 'none';
 
     }
 
@@ -35,11 +60,11 @@ function mostrarCampos() {
         // Para outras operações, exibe apenas um campo
         const inputNumeros = document.createElement('input');
         inputNumeros.type = 'text';
-        inputNumeros.placeholder = 'Ex: 4, 5, 8, 3, 5, 3';
+        inputNumeros.placeholder = 'Inserir os números aqui';
         inputContainer.appendChild(inputNumeros);
 
-        // Mostra o botão de 'Calcular' após o botão de 'Confirmar' ser clicado
-        calcularContainer.style.display = 'block';
+        // Mostra o botão de 'Calcular' após o botão de 'Confirmar'
+        calcularContainer.style.display = 'none';
 
     }
 
@@ -47,6 +72,13 @@ function mostrarCampos() {
     camposVisiveis = true;
 
 }
+
+document.querySelector('button[onclick="mostrarCampos()"]').addEventListener('click', function () {
+
+    const gerarCamposButton = document.getElementById('gerarCampos');
+    gerarCamposButton.style.display = 'block';
+
+});
 
 // Calcular a Média Simples
 function calcularMedia(numeros) {
@@ -233,13 +265,24 @@ function calcularEExibirResultado() {
 
     }
 
-    else if (operacaoSelecionada === 'mediaPonderada') {            // Arrumar a Média Ponderada (Não está mostrando os resultados ao clicar em 'Calcular')
+    else if (operacaoSelecionada === 'mediaPonderada') {
 
-        const inputNumeros = document.querySelector('#inputContainer input:first-child');
-        const numeros = inputNumeros.value.trim().split(',').map(Number);
-        const inputPesos = document.querySelector('#inputContainer input:nth-child(2)');
-        const pesos = inputPesos.value.trim().split(',').map(Number);
-        resultado = calcularMediaPonderada(numeros, pesos);
+        const inputNumeros = document.querySelector('#numeros');
+        const inputPesos = document.querySelector('#pesos');
+
+        if (!inputNumeros || !inputPesos) {
+
+            resultado = 'Campos de entrada não encontrados.';
+
+        }
+
+        else {
+
+            const numeros = inputNumeros.value.trim().split(',').map(Number);
+            const pesos = inputPesos.value.trim().split(',').map(Number);
+
+            resultado = calcularMediaPonderada(numeros, pesos);
+        }
 
     }
 
@@ -290,10 +333,15 @@ function calcularEExibirResultado() {
 function limparCampos() {
 
     // Limpe os campos de entrada
-    const inputNumeros = document.querySelector('#inputContainer input:first-child');
-    inputNumeros.value = '';
+    const inputNumeros = document.querySelector('#numeros');
 
-    const inputPesos = document.querySelector('#inputContainer input:nth-child(2)');
+    if (inputNumeros) {
+
+        inputNumeros.value = '';
+
+    }
+
+    const inputPesos = document.querySelector('#pesos');
 
     if (inputPesos) {
 
@@ -302,6 +350,7 @@ function limparCampos() {
     }
 
     // Oculte os campos de entrada
+    const inputContainer = document.getElementById('inputContainer')
     inputContainer.style.display = 'none';
 
     // Limpe o resultado
