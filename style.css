@@ -133,7 +133,6 @@ input {
 }
 
 @media screen and (max-width: 768px) {
-
     body {
         font-size: 18px;
     }
@@ -149,5 +148,4 @@ input {
     .container-t2 {
         margin-bottom: 20px;
     }
-
 }
