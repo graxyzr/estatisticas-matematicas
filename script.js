@@ -6,6 +6,8 @@ function mostrarCampos() {
     const calcularContainer = document.getElementById('calcularContainer');
     const numCamposContainer = document.getElementById('numCamposContainer');
     const gerarCamposButton = document.getElementById('gerarCampos');
+    const numCamposInput = document.getElementById('numCampos');
+    const resultadoDiv = document.getElementById('resultado');
 
     // Limpa os campos de entrada anteriores
     inputContainer.innerHTML = '';
@@ -23,16 +25,13 @@ function mostrarCampos() {
         inputNumeros.className = 'numeros-input';
 
         inputContainer.appendChild(inputNumeros);
-    }
-
-    else {
+    } else {
+        const numCamposValue = parseInt(numCamposInput.value);
         numCamposContainer.style.display = 'block';
         gerarCamposButton.style.display = 'block';
     }
-
     inputContainer.style.display = 'block';
     camposVisiveis = true;
-
 }
 
 // Adicione um event listener para o botão "Gerar Campos"
@@ -64,14 +63,15 @@ document.getElementById('gerarCampos').addEventListener('click', function () {
         const br = document.createElement('br');
         inputContainer.appendChild(br);
     }
-
     // Exibe o botão "Calcular" e "Limpar"
+    const calcularContainer = document.getElementById('calcularContainer');
     calcularContainer.style.display = 'block';
 
     // Oculta o input de 'Número de Campos' e o botão 'Gerar Campos'
+    const numCamposContainer = document.getElementById('numCamposContainer');
+    const gerarCamposButton = document.getElementById('gerarCampos');
     numCamposContainer.style.display = 'none';
     gerarCamposButton.style.display = 'none';
-
 });
 
 document.querySelector('button[onclick="mostrarCampos()"]').addEventListener('click', function () {
@@ -135,7 +135,6 @@ function calcularMediaGeometrica(numeros) {
     if (numeros.length === 0) {
         return 'O campo de números não pode estar vazio!';
     }
-
     const produto = numeros.reduce((acc, val) => acc * val, 1);
 
     const mediaGeometrica = Math.pow(produto, 1 / numeros.length);
@@ -158,7 +157,6 @@ function calcularModa(numeros) {
             // Inicializa a contagem de ocorrências desse número no objeto 'numCount' como 1
             numCount[num] = 1;
         }
-
     });
 
     let moda = [];
@@ -236,20 +234,30 @@ function calcularEExibirResultado() {
         const inputNumeros = document.querySelectorAll('.numeros-input');
         const inputPesos = document.querySelectorAll('.pesos-input');
 
-        const numerosValidos = Array.from(inputNumeros).every(input => isNumero(input.value));
-        const pesosValidos = Array.from(inputPesos).every(input => isNumero(input.value));
+        const numerosValidos = Array.from(inputNumeros).every(input => isNumero(input.value.trim()));
+        const pesosValidos = Array.from(inputPesos).every(input => isNumero(input.value.trim()));
 
-        if (!numerosValidos || !pesosValidos) {
-            resultado = 'Insira números válidos em todos os campos.';
+        // Verifica se há letras, sinais ou símbolos em algum dos campos
+        const contemCaracterInvalido = Array.from(inputNumeros).some(input => !isNumero(input.value.trim())) ||
+            Array.from(inputPesos).some(input => !isNumero(input.value.trim()));
+
+        if (!numerosValidos || !pesosValidos || contemCaracterInvalido) {
+            resultado = 'Informe números válidos em todos os campos e verifique se há letras, sinais ou símbolos.';
         } else {
-            const numeros = Array.from(inputNumeros).map(input => parseFloat(input.value));
-            const pesos = Array.from(inputPesos).map(input => parseFloat(input.value));
-            resultado = calcularMediaPonderada(numeros, pesos);
+            const numeros = Array.from(inputNumeros).map(input => parseFloat(input.value.trim()));
+            const pesos = Array.from(inputPesos).map(input => parseFloat(input.value.trim()));
+
+            // Verifica se o número de valores é igual ao número de pesos
+            if (numeros.length !== pesos.length) {
+                resultado = 'O número de valores deve ser igual ao número de pesos.';
+            } else {
+                resultado = calcularMediaPonderada(numeros, pesos);
+            }
         }
     } else {
         // Verifica se o campo de entrada contém números
         const inputNumeros = document.querySelector('#inputContainer input:first-child');
-        const numerosValidos = isNumero(inputNumeros.value);
+        const numerosValidos = inputNumeros.value.trim().split(',').every(isNumero);
 
         if (!numerosValidos) {
             resultado = 'Informe valores válidos.';
